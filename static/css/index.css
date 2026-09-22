@@ -1,0 +1,793 @@
+/* Modern CSS Variables for consistent theming */
+:root {
+  --primary-color: #315f4a;
+  --primary-hover: #244936;
+  --link-color: #2563eb;
+  --link-hover: #1d4ed8;
+  --accent-color: #4f846b;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --background-primary: #ffffff;
+  --background-secondary: #f8fafc;
+  --background-accent: #f1f5f9;
+  --border-color: #e2e8f0;
+  --green-deep: var(--primary-color);
+  --green-deeper: var(--primary-hover);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --gradient-primary: linear-gradient(135deg, #8fbea1 0%, #3f7d5c 100%);
+  --border-radius: 12px;
+  --border-radius-lg: 16px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 1rem;
+  background-color: var(--background-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--link-color);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+/* Match the visual density of Chrome at roughly 110% while keeping browser zoom at 100%. */
+@media screen and (min-width: 769px) {
+  html {
+    font-size: 17.6px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container.is-max-desktop {
+    max-width: 60rem;
+  }
+}
+
+
+/* Modern Button Styles */
+.button {
+  border-radius: var(--border-radius) !important;
+  font-weight: 600 !important;
+  transition: var(--transition) !important;
+  border: 2px solid transparent !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.button.is-dark {
+  background: var(--text-primary) !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: var(--shadow-md);
+}
+
+.button.is-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: var(--primary-color) !important;
+}
+
+.button.is-dark:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-md);
+}
+
+.link-block a {
+    margin: 8px 4px;
+}
+
+
+/* Hero Section Modernization */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero.is-light {
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hero-body {
+  padding: 4rem 1.5rem;
+}
+
+.publication-hero .hero-body {
+  padding: 2.5rem 1.5rem 1.5rem;
+}
+
+.teaser .hero-body {
+  padding: 0.75rem 1.5rem 3rem;
+}
+
+.teaser {
+  font-family: 'Inter', sans-serif;
+}
+
+
+/* Publication Content Styling */
+.publication-title {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 2.75rem !important;
+    font-weight: 800 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 1.25rem !important;
+    line-height: 1.1 !important;
+}
+
+.publication-authors {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.publication-author-names {
+    font-size: 1.35rem !important;
+    margin-bottom: 0.75rem;
+}
+
+.publication-affiliations {
+    font-size: 1.1rem !important;
+    line-height: 1.65;
+    margin-bottom: 0.75rem;
+}
+
+.publication-venue-text {
+    color: var(--text-secondary);
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.publication-actions {
+    margin-top: 0.75rem;
+}
+
+.publication-actions .link-block > .button {
+    margin: 0.2rem 0.55rem;
+}
+
+.publication-link-disabled {
+    background: #e5e7eb !important;
+    color: #64748b !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+    user-select: none;
+}
+
+.container.is-max-desktop.teaser-container {
+    max-width: 70.5rem;
+}
+
+.teaser-carousel {
+    position: relative;
+    width: min(82%, 58rem);
+    margin-inline: auto;
+    margin-bottom: 1.5rem;
+}
+
+.teaser-viewport {
+    overflow: hidden;
+    touch-action: pan-y;
+}
+
+.teaser-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    transform: translateX(0);
+    transition: transform 350ms ease;
+    will-change: transform;
+}
+
+.teaser-slide {
+    display: flex;
+    flex: 0 0 100%;
+    justify-content: center;
+    min-width: 0;
+    opacity: 1;
+}
+
+.teaser-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    object-fit: contain;
+    background: var(--background-primary);
+}
+
+.teaser-controls {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.teaser-tabs {
+    position: absolute;
+    bottom: -1.35rem;
+    left: 50%;
+    display: flex;
+    gap: 0.45rem;
+    transform: translateX(-50%);
+    pointer-events: auto;
+}
+
+.teaser-tab,
+.teaser-arrow {
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font: inherit;
+    transition: color 180ms ease, border-color 180ms ease;
+}
+
+.teaser-tab {
+    width: 0.55rem;
+    height: 0.55rem;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--border-color);
+}
+
+.teaser-tab.is-active {
+    background: var(--text-primary);
+}
+
+.teaser-arrow {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: 0 2px 8px rgb(15 23 42 / 0.18);
+    color: #fff;
+    font-size: 1rem;
+    transform: translateY(-50%);
+    pointer-events: auto;
+}
+
+.teaser-arrow-previous {
+    left: 0.75rem;
+}
+
+.teaser-arrow-next {
+    right: 0.75rem;
+}
+
+.teaser-arrow:hover {
+    background: var(--primary-hover);
+    box-shadow: 0 3px 12px rgb(15 23 42 / 0.24);
+}
+
+.teaser-tab:hover {
+    background: var(--text-secondary);
+}
+
+.teaser-tab:focus-visible,
+.teaser-arrow:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+.author-block {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+/* Modern Video and Carousel Styling */
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    border-radius: var(--border-radius-lg) !important;
+    box-shadow: var(--shadow-xl);
+    transition: var(--transition);
+}
+
+.publication-video:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-lg);
+}
+
+/* Section Titles */
+.title.is-3 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--text-primary);
+  margin-bottom: 2rem !important;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.title.is-3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+/* Content Improvements */
+.content.has-text-justified {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.content.has-text-justified p {
+  margin-bottom: 1.5rem;
+}
+
+.paper-abstract .content.has-text-justified {
+  font-size: 1rem;
+}
+
+.paper-abstract {
+  border-bottom: 0 !important;
+  padding-bottom: 1rem;
+}
+
+.paper-abstract .content p:last-child {
+  margin-bottom: 0;
+}
+
+.video-section {
+  border-top: 0 !important;
+}
+
+.video-section .hero-body {
+  padding-top: 1.5rem;
+}
+
+.xmot-figure {
+  width: 92%;
+  margin: 0 auto;
+}
+
+.xmot-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.xmot-description {
+  width: 80%;
+  margin: 2rem auto 0;
+}
+
+.xmot-section .xmot-description {
+  font-size: 1rem;
+}
+
+.long-horizon-media {
+  width: 92%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.long-horizon-description {
+  width: 80%;
+  margin: 2rem auto 0;
+  font-size: 1rem !important;
+}
+
+.long-horizon-media video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 270 / 113;
+  object-fit: contain;
+  background: var(--background-primary);
+}
+
+.results-figure {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.results-figure img {
+  display: block;
+  width: 92%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.results-caption {
+  width: 80%;
+  margin: 1.5rem auto 0;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: left;
+}
+
+/* Footer Improvements */
+.footer {
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 1.5rem;
+}
+
+.footer .content {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.footer a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* BibTeX */
+pre {
+  background: var(--background-accent) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  padding: 1.5rem !important;
+  font-size: 0.9rem !important;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+code {
+  background: var(--background-accent) !important;
+  color: var(--text-primary) !important;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace !important;
+}
+
+.bibtex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.copy-bibtex-btn {
+  display: inline-flex;
+  align-items: center;
+  min-width: 5.5rem;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background: var(--green-deep);
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.copy-bibtex-btn:hover {
+  background: var(--green-deeper);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.copy-bibtex-btn.copied {
+  background: var(--accent-color);
+}
+
+.copy-bibtex-btn:focus-visible,
+.scroll-to-top:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  background: var(--green-deep);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.scroll-to-top:hover {
+  background: var(--green-deeper);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* Mobile Responsive Improvements */
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  .hero-body {
+    padding: 2rem 1rem;
+  }
+  
+  .publication-hero .hero-body {
+    padding: 2rem 1rem 1rem;
+  }
+  
+  .publication-title {
+    font-size: clamp(1.65rem, 6.2vw, 2rem) !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    text-wrap: balance;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .publication-title br {
+    display: none;
+  }
+  
+  .publication-authors {
+    font-size: 1rem !important;
+  }
+
+  .publication-author-names {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem 0.75rem;
+    font-size: 1rem !important;
+    line-height: 1.6;
+  }
+
+  .publication-authors .author-block {
+    margin-right: 0;
+  }
+
+  .publication-affiliations {
+    font-size: 0.9rem !important;
+    line-height: 1.55;
+  }
+
+  .publication-affiliations .author-block + br + .author-block {
+    margin-top: 0.5rem;
+  }
+
+  .publication-venue-text {
+    font-size: 0.9rem !important;
+  }
+
+  .publication-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.625rem;
+    max-width: 24rem;
+    margin-inline: auto;
+  }
+
+  .publication-actions .link-block > .button {
+    width: 100%;
+    min-height: 44px;
+    margin: 0 !important;
+  }
+
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  .title.is-3 {
+    font-size: 1.4rem;
+    line-height: 1.35;
+    text-wrap: balance;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.35rem !important;
+  }
+
+  .title.is-3::after {
+    width: 56px;
+    height: 2px;
+  }
+
+  .bibtex-header .title {
+    font-size: 1.4rem;
+    margin-bottom: 0;
+  }
+  
+  .button {
+    margin: 0.25rem !important;
+    font-size: 0.875rem !important;
+    padding: 0.75rem 1rem !important;
+  }
+  
+  .teaser .hero-body {
+    padding: 1rem;
+  }
+
+  .teaser-carousel {
+    width: 94%;
+  }
+
+  .teaser-video {
+    width: 100%;
+    height: auto;
+  }
+
+  .xmot-description {
+    width: 100%;
+  }
+
+  .xmot-figure {
+    width: 100%;
+  }
+
+  .long-horizon-media,
+  .long-horizon-description {
+    width: 100%;
+  }
+
+  .results-figure {
+    width: 100%;
+  }
+
+  .results-figure img,
+  .results-caption {
+    width: 100%;
+  }
+
+  .teaser-arrow {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .teaser-arrow-previous {
+    left: 0.5rem;
+  }
+
+  .teaser-arrow-next {
+    right: 0.5rem;
+  }
+  
+  .content.has-text-justified {
+    text-align: left !important;
+    font-size: 1rem;
+    line-height: 1.65;
+    overflow-wrap: break-word;
+  }
+
+  .paper-abstract .content.has-text-justified,
+  .xmot-section .xmot-description,
+  .long-horizon-description,
+  .results-caption {
+    font-size: 0.933333rem !important;
+  }
+
+  .scroll-to-top {
+    right: 1rem;
+    bottom: 1rem;
+    width: 44px;
+    height: 44px;
+  }
+
+  #bibtex-code,
+  #bibtex-code code {
+    font-size: 10px !important;
+    line-height: 1.6;
+  }
+
+  .footer .content {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-body {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teaser-track {
+    transition: none;
+  }
+}
+
+/* Tablet Responsive */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .hero-body {
+    padding: 3rem 2rem;
+  }
+  
+}
+
+/* Animation for page load */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero, .section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Improved focus states for accessibility */
+.button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+a:not(.button):focus {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+
+/* Print styles */
+@media print {
+  .hero, .section {
+    animation: none;
+  }
+  
+  .button {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    box-shadow: none !important;
+  }
+}

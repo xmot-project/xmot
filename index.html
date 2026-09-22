@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Basic page information for search engines and browsers. -->
+  <meta name="description" content="An efficient method for 3D object detection in LiDAR point clouds that uses information from past scans to improve detection accuracy and maintain stable performance during continuous operation.">
+  <meta name="author" content="Eisho Tsuji, Ryuhei Hamaguchi, Masaki Onishi, Ken Sakurada">
+  <meta name="robots" content="index, follow">
+
+  <!-- Social metadata; URL and preview image can be added when the public site is available. -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Rethinking Temporal Feature Propagation for Efficient 3D Object Detection">
+  <meta property="og:description" content="An efficient method for 3D object detection in LiDAR point clouds that uses information from past scans to improve detection accuracy and maintain stable performance during continuous operation.">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="3D object detection">
+  <meta property="article:tag" content="LiDAR">
+  <meta property="article:tag" content="temporal feature propagation">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Rethinking Temporal Feature Propagation for Efficient 3D Object Detection">
+  <meta name="twitter:description" content="An efficient method for 3D object detection in LiDAR point clouds that uses information from past scans to improve detection accuracy and maintain stable performance during continuous operation.">
+
+  <!-- Academic metadata -->
+  <meta name="citation_title" content="Rethinking Temporal Feature Propagation for Efficient 3D Object Detection">
+  <meta name="citation_author" content="Tsuji, Eisho">
+  <meta name="citation_author" content="Hamaguchi, Ryuhei">
+  <meta name="citation_author" content="Onishi, Masaki">
+  <meta name="citation_author" content="Sakurada, Ken">
+  <meta name="citation_journal_title" content="IEEE Robotics and Automation Letters">
+
+  <meta name="theme-color" content="#315f4a">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <title>Rethinking Temporal Feature Propagation for Efficient 3D Object Detection</title>
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured data for search engines: describes the paper's title, summary, and journal. Not displayed on the page. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Rethinking Temporal Feature Propagation for Efficient 3D Object Detection",
+    "description": "An efficient method for 3D object detection in LiDAR point clouds that uses information from past scans to improve detection accuracy and maintain stable performance during continuous operation.",
+    "isPartOf": {
+      "@type": "Periodical",
+      "name": "IEEE Robotics and Automation Letters"
+    },
+    "keywords": ["3D object detection", "LiDAR", "temporal feature propagation", "scan-by-scan detection", "X-MoT", "sequential evaluation", "long-sequence training", "Union-QK"]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" type="button" data-scroll-to-top title="Scroll to top" aria-label="Scroll to top">&#8593;</button>
+
+  <main id="main-content">
+  <section class="hero publication-hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Rethinking Temporal Feature Propagation<br> for Efficient 3D Object Detection</h1>
+            <div class="is-size-5 publication-authors publication-author-names">
+              <span class="author-block">
+                Eisho Tsuji<sup>1,2</sup>,
+              </span>
+              <span class="author-block">
+                Ryuhei Hamaguchi<sup>2</sup>,
+              </span>
+              <span class="author-block">
+                Masaki Onishi<sup>2</sup>,
+              </span>
+              <span class="author-block">
+                Ken Sakurada<sup>1,2</sup>
+              </span>
+            </div>
+
+            <div class="is-size-6 publication-authors publication-affiliations">
+              <span class="author-block"><sup>1</sup>Graduate School of Informatics, Kyoto University</span><br>
+              <span class="author-block"><sup>2</sup>National Institute of Advanced Industrial Science and Technology (AIST)</span>
+            </div>
+
+            <div class="is-size-6 publication-venue-text">
+              IEEE Robotics and Automation Letters (RA-L), 2026
+            </div>
+
+            <div class="publication-actions">
+              <div class="publication-links">
+                <!-- Enable the Code and arXiv links when their public URLs are available. -->
+                <span class="link-block">
+                  <a href="https://ieeexplore.ieee.org/document/11694187" target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">Paper</a>
+                </span>
+                <span class="link-block">
+                  <span class="button is-normal is-rounded publication-link-disabled" aria-disabled="true">Code</span>
+                </span>
+                <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=VKIIlRF-wBM" target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">Video</a>
+                </span>
+                <span class="link-block">
+                  <span class="button is-normal is-rounded publication-link-disabled" aria-disabled="true">arXiv</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<!-- Teaser video -->
+<section class="hero teaser" aria-label="X-MoT comparison video">
+  <div class="container is-max-desktop teaser-container">
+    <div class="hero-body">
+      <div class="teaser-carousel" data-teaser-carousel>
+        <div class="teaser-viewport">
+          <div class="teaser-track" data-teaser-track>
+            <div class="teaser-slide is-active" data-teaser-slide data-slide-index="0" aria-hidden="false">
+              <video class="teaser-video" poster="static/images/nusc_040_poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="nuScenes sequence 040 comparison video">
+                <source src="static/videos/nusc_040_web.mp4" type="video/mp4">
+                Your browser does not support the video element.
+              </video>
+            </div>
+            <div class="teaser-slide" data-teaser-slide data-slide-index="1" aria-hidden="true" inert>
+              <video class="teaser-video" poster="static/images/nusc_123_poster.jpg" muted loop playsinline preload="metadata" aria-label="nuScenes sequence 123 comparison video">
+                <source src="static/videos/nusc_123_web.mp4" type="video/mp4">
+                Your browser does not support the video element.
+              </video>
+            </div>
+            <div class="teaser-slide" data-teaser-slide data-slide-index="2" aria-hidden="true" inert>
+              <video class="teaser-video" poster="static/images/nusc_128_poster.jpg" muted loop playsinline preload="metadata" aria-label="nuScenes sequence 128 comparison video">
+                <source src="static/videos/nusc_128_web.mp4" type="video/mp4">
+                Your browser does not support the video element.
+              </video>
+            </div>
+            <div class="teaser-slide" data-teaser-slide data-slide-index="3" aria-hidden="true" inert>
+              <video class="teaser-video" poster="static/images/nusc_026_poster.jpg" muted loop playsinline preload="metadata" aria-label="nuScenes sequence 026 comparison video">
+                <source src="static/videos/nusc_026_web.mp4" type="video/mp4">
+                Your browser does not support the video element.
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="teaser-controls" aria-label="Select comparison video">
+          <button class="teaser-arrow teaser-arrow-previous" type="button" data-teaser-prev aria-label="Show previous video">&#10094;</button>
+          <div class="teaser-tabs" role="tablist" aria-label="Comparison videos">
+            <button class="teaser-tab is-active" type="button" role="tab" data-teaser-tab aria-label="Show video 1" aria-selected="true" tabindex="0"></button>
+            <button class="teaser-tab" type="button" role="tab" data-teaser-tab aria-label="Show video 2" aria-selected="false" tabindex="-1"></button>
+            <button class="teaser-tab" type="button" role="tab" data-teaser-tab aria-label="Show video 3" aria-selected="false" tabindex="-1"></button>
+            <button class="teaser-tab" type="button" role="tab" data-teaser-tab aria-label="Show video 4" aria-selected="false" tabindex="-1"></button>
+          </div>
+          <button class="teaser-arrow teaser-arrow-next" type="button" data-teaser-next aria-label="Show next video">&#10095;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light paper-abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We propose a scan-by-scan framework for LiDAR 3D object detection that eliminates redundant re-encoding of overlapping historical scans by propagating temporal context through internal memory.
+            This formulation raises two fundamental challenges: inter-step feature misalignment and long-horizon degradation that conventional short-window evaluation can obscure.
+            To address the former, we introduce Cross-Attention Motion Transformation (X-MoT), a motion-aware recurrent update module that aligns propagated memory with the current observation through coarse egomotion compensation followed by cross-attention-based refinement.
+            To address the latter, we introduce sequential evaluation under continuous inference without state resets, and show that long-sequence training and Union-QK further improve robustness in this setting.
+            Under conventional evaluation, X-MoT achieves a favorable accuracy-latency trade-off against multi-scan baselines.
+            At the same time, sequential evaluation reveals substantial long-horizon degradation in memory-based detectors that is obscured by conventional evaluation.
+            Taken together, these results show that scan-by-scan detection can deliver competitive accuracy at low latency, provided that its long-horizon behavior is explicitly evaluated and stabilized.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- X-MoT method -->
+<section class="section xmot-section" aria-labelledby="xmot-title">
+  <div class="container is-max-desktop">
+    <h2 id="xmot-title" class="title is-3 has-text-centered">Cross-Attention Motion Transformation (X-MoT)</h2>
+    <figure class="xmot-figure">
+      <img src="static/images/xmot.png"
+           alt="Overview of X-MoT, showing coarse egomotion alignment, cross-attention-based fine alignment and correspondence refinement, memory control, and the detection head."
+           width="3525" height="671" loading="lazy">
+    </figure>
+    <div class="content has-text-justified xmot-description">
+      <p>
+        Our scan-by-scan detector processes one LiDAR scan at a time and carries temporal context forward in a BEV feature memory. For each scan, the backbone extracts the current BEV feature, while X-MoT updates the hidden feature propagated from the previous scan. X-MoT first coarsely aligns the memory to the current frame using egomotion, then applies window-based cross-attention to model local correspondence between the current feature and the propagated memory, refining residual misalignment caused by coarse BEV resolution and moving objects. Memory control filters the updated feature before it is passed to the detection head and propagated to the next scan.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- End X-MoT method -->
+
+<!-- Long-horizon sequential inference -->
+<section class="section hero is-light long-horizon-section" aria-labelledby="long-horizon-title">
+  <div class="container is-max-desktop">
+    <h2 id="long-horizon-title" class="title is-3 has-text-centered">Long-Horizon Sequential Inference</h2>
+    <figure class="long-horizon-media">
+      <video autoplay muted loop playsinline controls preload="metadata"
+             aria-label="Long-horizon stability comparison video">
+        <source src="static/videos/LScompare.mp4" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+    </figure>
+    <div class="content has-text-justified long-horizon-description">
+      <p>
+        Conventional evaluation repeatedly resets recurrent states over short temporal windows, potentially masking failures that emerge only during prolonged inference. We therefore introduce sequential evaluation, which processes each sequence continuously without resetting the internal memory. Under this protocol, memory-based detectors exhibit substantial long-horizon degradation: detection accuracy drops, and predictions become less temporally consistent as inference proceeds.
+      </p>
+      <p>
+        To address this, we use two complementary strategies. Long-sequence (LS) training, based on TBPTT, exposes the detector to repeatedly updated memory states and reduces the mismatch between short-horizon training and continuous inference across recurrent detectors. Union-QK addresses a complementary issue arising from sparse LiDAR features by restricting the updated memory to regions supported by either the current observation or the egomotion-aligned previous memory. Together, they substantially improve long-horizon stability.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- End long-horizon sequential inference -->
+
+<!-- Results -->
+<section class="section results-section" aria-labelledby="results-title">
+  <div class="container is-max-desktop">
+    <h2 id="results-title" class="title is-3 has-text-centered">Results</h2>
+    <figure class="results-figure">
+      <img src="static/images/results.png"
+           alt="Results showing the accuracy-speed trade-off of X-MoT and improvements from long-sequence training and Union-QK under sequential evaluation."
+           width="3709" height="1446" loading="lazy">
+      <figcaption class="results-caption">
+        <strong>Left:</strong> Under conventional evaluation, X-MoT retains nearly the accuracy of multi-scan input while operating close to single-scan latency. <strong>Right:</strong> Sequential evaluation exposes substantial long-horizon degradation, which is largely recovered by LS training and Union-QK.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+<!-- End results -->
+
+<!-- Youtube video -->
+<section class="hero is-small video-section">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Video</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/VKIIlRF-wBM" title="X-MoT project video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End youtube video -->
+
+<!-- BibTeX citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <div class="bibtex-header">
+      <h2 class="title">BibTeX</h2>
+      <button class="copy-bibtex-btn" type="button" data-copy-bibtex title="Copy BibTeX to clipboard">Copy</button>
+    </div>
+    <pre id="bibtex-code"><code>@article{tsuji2026xmot,
+  author  = {Tsuji, Eisho and Hamaguchi, Ryuhei and Onishi, Masaki and Sakurada, Ken},
+  title   = {Rethinking Temporal Feature Propagation for Efficient 3D Object Detection},
+  journal = {IEEE Robotics and Automation Letters},
+  year    = {2026},
+  doi     = {10.1109/LRA.2026.3734879},
+}</code></pre>
+  </div>
+</section>
+<!-- End BibTeX citation -->
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page is a modified version of the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener noreferrer">Academic Project Page Template by Eliahu Horwitz</a>, which was adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener noreferrer">Nerfies</a> project page.
+            The website source is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
